@@ -1,0 +1,79 @@
+<!DOCTYPE  html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://xmlns.jcp.org/jsf/core"
+xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+<title>Ajax_try1</title>
+</h:head>
+<h:body>
+<h2>Anggara Diebrata</h2>
+<h4>21120117140008</h4>
+	<h:form>
+		<fieldset>
+		<legend>Random Number: No Ajax</legend>
+		<h:commandButton value="Show Number"
+		action="#{numberGenerator.randomize}"/>
+	<h2><h:outputText value="#{numberGenerator.number}"/></h2>
+</fieldset>
+</h:form>
+<br/>
+<h:form>
+<fieldset>
+		<legend>Random Number</legend>
+		<h:commandButton value="Show Number"
+		action="#{numberGenerator.randomize}">
+		<f:ajax render="numField1"/>
+		</h:commandButton><br/>
+		<h2><h:outputText value="#{numberGenerator.number}" id="numField1"/></h2>
+</fieldset>
+</h:form>
+<br/>
+<h:form>
+<fieldset>
+		<legend>Random Number: Ajax
+		(Version with action omitted)</legend>
+		<h:commandButton value="Show Number"> <!-- No action -->
+		<f:ajax render="numField2"/>
+		</h:commandButton>
+		<h2><h:outputText value="#{numberGenerator.number2}" id="numField2"/></h2>
+</fieldset>
+</h:form>
+<br/>
+
+<h:form>
+<fieldset>
+		<legend>Random Number (with execute="someId")</legend>
+		Range:
+		<h:inputText value="#{numberGenerator.range}"
+		id="rangeField"/><br/>
+		<h:commandButton value="Show Number"
+		action="#{numberGenerator.randomize}">
+		<f:ajax execute="rangeField"
+		render="numField3"/>
+		</h:commandButton><br/>
+		<h2><h:outputText value="#{numberGenerator.number}"
+		id="numField3"/></h2>
+</fieldset>
+</h:form>
+<br/>
+
+<h:form>
+<fieldset>
+		<legend>Bank Customer Lookup (with execute="@form")</legend>
+		Customer ID:
+		<h:inputText value="#{bankingBeanAjax.customerId}"/><br/>
+		Password:
+		<h:inputSecret value="#{bankingBeanAjax.password}"/><br/>
+		<h:commandButton value="Show Current Balance"
+		action="#{bankingBeanAjax.showBalance}">
+		<f:ajax execute="@form"
+		render="ajaxMessage1"/>
+		</h:commandButton>
+		<br/>
+		<h2><h:outputText value="#{bankingBeanAjax.message}"
+		id="ajaxMessage1"/></h2>
+</fieldset>
+</h:form>
+</h:body>
+</html>
